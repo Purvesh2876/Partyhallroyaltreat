@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Gmail Emails</title>
+  </head>
+  <body>
+    <% emails.forEach(function(email) { %>
+      <h2><%= email.snippet %></h2>
+      <p><%= email.body %></p>
+    <% }); %>
+  </body>
+</html>
