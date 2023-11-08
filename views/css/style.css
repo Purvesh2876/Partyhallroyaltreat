@@ -3330,7 +3330,7 @@ Page Title
     top: 0;
     height: 100%;
     width: 100%;
-    background: #000ec1;
+    background: #00043f;
     background: -o-radial-gradient(center, ellipse, #000ec1 0%, #000c47 100%, #000c47 100%);
     background: radial-gradient(ellipse at center, #000ec1 0%, #000c47 100%, #000c47 100%);
     content: "";
@@ -4372,7 +4372,7 @@ a.ui-button:active,
 .about-section .image-3 {
     position: absolute;
     border: 30px solid #ffae00;
-    top: 0;
+    top: 50px;   /*changed*/
     left: -50px;
     z-index: 2;
     border-radius: 50%;
@@ -4381,7 +4381,7 @@ a.ui-button:active,
 
 .about-section .about-image-wrapper .play-btn {
     position: absolute;
-    left: 50%;
+    left: 26%;
     top: 50%;
     z-index: 3;
     width: 140px;
