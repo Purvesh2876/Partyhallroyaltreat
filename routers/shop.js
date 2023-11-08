@@ -62,6 +62,37 @@ router.get("/alltours",  async (req, res) => {
 	});
 });
 
+router.get("/gallery",  async (req, res) => {
+	const category = await Category.find();
+	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
+	const footerwedding = await Category.find({ tag: 'wedding' }).limit(5);
+	const footerbirthday = await Category.find({ tag: 'birthday' }).limit(5);
+	const footertopattr = await Category.find({ tag: 'top attraction' }).limit(5);
+	res.render("gallery", {
+		activePage: 'gallery',
+		category: category,
+		footerpopular:footerpopular,
+		footerwedding:footerwedding,
+		footerbirthday:footerbirthday,
+		footertopattr:footertopattr,
+		
+	});
+});
+router.get("/services",  async (req, res) => {
+	const category = await Category.find();
+	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
+	const footerwedding = await Category.find({ tag: 'wedding' }).limit(5);
+	const footertopattr = await Category.find({ tag: 'top attraction' }).limit(5);
+	res.render("services", {
+		activePage: 'services',
+		category: category,
+		footerpopular:footerpopular,
+		footerwedding:footerwedding,
+		footertopattr:footertopattr,
+		
+	});
+});
+
 router.get("/popular",  async (req, res) => {
 	const popular = await Category.find({ tag: 'popular' });
 	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
