@@ -5,7 +5,7 @@
 <div class="wrapper">
   <%- include ('component/header.ejs') %> 
   
-  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Left side column. contains the box and sidebar -->
   <%- include ('component/aside.ejs') %> 
 
   <!-- Content Wrapper. Contains page content -->
@@ -31,51 +31,45 @@
         </div>
 
         <div class="col-sm-6">
-        <form role="form" enctype="multipart/form-data" action="updatecategory/<%= category.id %>" method="POST">
-          <h2>Update logoproduct</h2>
+        <form role="form" enctype="multipart/form-data" action="addsub" method="POST">
+          <h2>Add Category</h2>
             <div class="box-body">
               <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" name="country" value="<%= category.country %>" placeholder="Enter country">
+                <input type="text" required class="form-control" id="country" name="country" placeholder="Enter country category">
               </div>
-
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="<%= category.name %>" placeholder="Enter name">
-              </div>
-
-              <!-- <div class="form-group">
-                <label for="tag">Tag</label>
-                <input type="text" class="form-control" id="tag" name="tag" value="<%= category.tag %>" placeholder="Enter tag ">
-              </div> -->
               <div class="form-group">
                 <label for="tag">Tag</label>
                 <select id="tag" required class="form-control" name="tag" id="pet-select">
                   <option value="popular">Popular</option>
                   <option value="wedding">Wedding</option>
                   <option value="birthday">birthday</option>
-                  <option value="top attraction">Top Attr action</option>
+                  <option value="top attraction">Top Attraction</option>
                 </select>
                 <!-- <input type="text" required class="form-control" id="tag" name="tag" placeholder="Enter tag of category"> -->
               </div>
               <div class="form-group">
-                <label for="image">Add image</label>
-                <input type="file" name="image" id="image" value="<%= category.image %>">
+                <label for="name">Name</label>
+                <input type="text" required class="form-control" id="name" name="name" placeholder="Enter category">
               </div>
+             
               
               <div class="form-group">
-                <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price" value="<%= category.price %>" placeholder="Enter price of package">
+                <label for="image">Add image</label>
+                <input type="file" required name="image" id="image">
               </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" required class="form-control" id="price" name="price" placeholder="Enter Price of Package">
+              </div>
+            
             </div>
             <!-- /.box-body -->
 
             <div class="box-footer">
-             
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
-
           </div>
 
           <div class="col-sm-3">

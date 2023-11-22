@@ -81,7 +81,7 @@
 
                         </ul>
 
-                        <button class="nav-toggler"><i class="flaticon flaticon-menu-2"></i></button>
+                        <!-- <button class="nav-toggler"><i class="flaticon flaticon-menu-2"></i></button> -->
 
                     </div>
 
@@ -111,12 +111,12 @@
                         <nav class="main-menu navbar-expand-md">
                             <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li class="current"><a href="/">Home</a></li>
-                                    <li><a href="about.html">AboutUs</a></li>
-									<li><a href="services.html">Services</a></li>
-									<li><a href="facilities.html">Facilities</a></li>
-									<li><a href="gallery.html">Gallery</a></li>
-									<li><a href="contact.html">Contact</a></li>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/about">AboutUs</a></li>
+									<li><a href="/services">Services</a></li>
+									<li><a href="/facilities">Facilities</a></li>
+									<li class="current"><a href="/gallery">Gallery</a></li>
+									<li><a href="/contact">Contact</a></li>
                                 </ul>
 
                             </div>
@@ -127,7 +127,7 @@
                         <div class="outer-box clearfix">                            
                             <!-- Quote Btn -->
                             <div class="btn-box">
-                                <a href="contact.html#1" data-toggle="modal" data-target="#modalContactForm" class="theme-btn btn-style-one"><span class="btn-title"><i class="flaticon-chair"></i> Book Hall</span></a>
+                                <a href="/contact" data-toggle="modal" data-target="#modalContactForm" class="theme-btn btn-style-one"><span class="btn-title"><i class="flaticon-chair"></i> Book Hall</span></a>
                             </div>
 						</div>
                     </div>
@@ -333,26 +333,90 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
 
             </div>
 
-            <div class="row">
-                <!-- Gallery Block -->
-                <!-- Gallery Block -->
+            <!-- <div class="row">
+               
                 <% category.forEach((item, index)=> { %>
                 <div class="gallery-block col-lg-4 col-md-4 col-sm-12">
                     <div class="image-box" style="width:312px; height:174px; object-fit:contain; cursor:pointer;">
-                        <!-- <figure class="image"><img src="images/gallery/1.jpg" alt="Mini Wedding Halls in South Bangalore"></figure> -->
                         <figure class="image"><img src="<%= item.image %>" alt="Mini Wedding Halls in South Bangalore"></figure>
                         <div class="overlay-box">
-                            <!-- <div class="icon"><img src="images/icons/logo.png" alt=""></div> -->
                             <h3><%= item.tag %></h3>
                         </div>
                     </div>
                 </div>
                 <% }) %>
 
-                <!-- Gallery Block -->
-               
+           
 				
+            </div> -->
+
+            <!-- Add a filter button outside the row -->
+            <button class="filterButton" data-tag="all">Show All</button>
+            <button class="filterButton" data-tag="wedding">Wedding</button>
+            <button class="filterButton" data-tag="birthday">Birthday</button>
+            <button class="filterButton" data-tag="popular">Popular</button>
+            <button class="filterButton" data-tag="party">Party</button>
+
+<div class="row">
+    <!-- Gallery Block -->
+    <% category.forEach((item, index) => { %>
+    <div class="gallery-block col-lg-4 col-md-4 col-sm-12" data-tag="<%= item.tag %>">
+        <div class="image-box" style="width: 312px; height: 174px; object-fit: contain; cursor: pointer;">
+            <figure class="image"><img src="<%= item.image %>" alt="Mini Wedding Halls in South Bangalore"></figure>
+            <div class="overlay-box">
+                <h3><%= item.tag %></h3>
             </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+<!-- <script>
+    // Add event listener to the filter button
+    document.getElementById('weddingFilter').addEventListener('click', function () {
+        // Hide all images
+        var galleryBlocks = document.querySelectorAll('.gallery-block');
+        galleryBlocks.forEach(function (block) {
+            block.style.display = 'none';
+        });
+
+        // Show only images with tag 'wedding'
+        var weddingImages = document.querySelectorAll('.gallery-block[data-tag="wedding"]');
+        weddingImages.forEach(function (image) {
+            image.style.display = 'block';
+        });
+    });
+</script> -->
+
+<script>
+    // Add event listeners to the filter buttons
+    var filterButtons = document.querySelectorAll('.filterButton');
+
+    filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            // Hide all images
+            var galleryBlocks = document.querySelectorAll('.gallery-block');
+            galleryBlocks.forEach(function (block) {
+                block.style.display = 'none';
+            });
+
+            // Show all images if the "All" button is clicked
+            if (button.getAttribute('data-tag') === 'all') {
+                galleryBlocks.forEach(function (block) {
+                    block.style.display = 'block';
+                });
+            } else {
+                // Show only images with the selected tag
+                var selectedTag = button.getAttribute('data-tag');
+                var filteredImages = document.querySelectorAll('.gallery-block[data-tag="' + selectedTag + '"]');
+                filteredImages.forEach(function (image) {
+                    image.style.display = 'block';
+                });
+            }
+        });
+    });
+</script>
+
 
         </div>
     </section>

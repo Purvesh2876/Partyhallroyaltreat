@@ -81,7 +81,7 @@
 
                         </ul>
 
-                        <button class="nav-toggler"><i class="flaticon flaticon-menu-2"></i></button>
+                        <!-- <button class="nav-toggler"><i class="flaticon flaticon-menu-2"></i></button> -->
 
                     </div>
 
@@ -111,12 +111,12 @@
                         <nav class="main-menu navbar-expand-md">
                             <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li class="current"><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">AboutUs</a></li>
-									<li><a href="services.html">Services</a></li>
-									<li><a href="facilities.html">Facilities</a></li>
-									<li><a href="gallery.html">Gallery</a></li>
-									<li><a href="contact.html">Contact</a></li>
+                                    <li class="current"><a href="/">Home</a></li>
+                                    <li><a href="/about">AboutUs</a></li>
+									<li><a href="/services">Services</a></li>
+									<li><a href="/facilities">Facilities</a></li>
+									<li><a href="/gallery">Gallery</a></li>
+									<li><a href="/contact">Contact</a></li>
                                 </ul>
 
                             </div>
@@ -127,7 +127,7 @@
                         <div class="outer-box clearfix">                            
                             <!-- Quote Btn -->
                             <div class="btn-box">
-                                <a href="contact.html#1" data-toggle="modal" data-target="#modalContactForm" class="theme-btn btn-style-one"><span class="btn-title"><i class="flaticon-chair"></i> Book Hall</span></a>
+                                <a href="/contact" data-toggle="modal" data-target="#modalContactForm" class="theme-btn btn-style-one"><span class="btn-title"><i class="flaticon-chair"></i> Book Hall</span></a>
                             </div>
 						</div>
                     </div>
@@ -1399,7 +1399,14 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
     <!--End Fun Fact Section -->
 
 
+    <button id="redirectToGallery">View Popular Images</button>
 
+    <script>
+        document.getElementById('redirectToGallery').addEventListener('click', function () {
+            // Redirect to the gallery page with the 'filter' query parameter
+            window.location.href = '/gallery?filter=popular';
+        });
+    </script>
     <!-- Speakers Section -->
 
     <section class="speakers-section">
@@ -1617,7 +1624,7 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
 
                 <span class="text">Online Banquet Hall Booking in Bangalore. Check availability Online & Book venues for Wedding, Party, Conference, Reception, Engagement, Naming Ceremony, Birthday Party.</span>
 
-                <a href="contact.html#1" class="theme-btn btn-style-two"><span class="btn-title">Book Now Hall</span></a>
+                <a href="/contact" class="theme-btn btn-style-two"><span class="btn-title">Book Now Hall</span></a>
 
             </div>
 

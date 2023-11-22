@@ -7,6 +7,7 @@ const { User } = require("../models/user");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const { Product } = require("../models/product");
+const { Sub } = require("../models/sub");
 const { subCategory } = require("../models/subcategory");
 const { Category } = require("../models/category");
 const {Heading} = require ("../models/heading");
@@ -19,11 +20,12 @@ const apiKey = process.env.API_KEY;
 router.get(`/`, async (req, res) => {
 	// const product = await Product.find().limit(8);
 	const category = await Category.find();
+	const sub = await Sub.find();
 	const heading = await Heading.find();
 	const review = await Review.find();
 	const popular = await Category.find({ tag: 'popular' });
 	const wedding = await Category.find({ tag: 'wedding' });
-	const top = await Category.find({ tag: 'top attraction' });
+	const top = await Category.find({ tag: 'top attraction' });Category
 	
 	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
 	const footerwedding = await Category.find({ tag: 'wedding' }).limit(5);
@@ -35,6 +37,7 @@ router.get(`/`, async (req, res) => {
 		activePage: 'home',
 		footerpopular:footerpopular,
 		footertopattr:footertopattr,
+		sub: sub,
 		category: category,
 		heading: heading,
 		review: review,
@@ -78,6 +81,40 @@ router.get("/gallery",  async (req, res) => {
 		
 	});
 });
+
+router.get("/facilities",  async (req, res) => {
+	const category = await Category.find();
+	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
+	const footerwedding = await Category.find({ tag: 'wedding' }).limit(5);
+	const footerbirthday = await Category.find({ tag: 'birthday' }).limit(5);
+	const footertopattr = await Category.find({ tag: 'top attraction' }).limit(5);
+	res.render("facilities", {
+		activePage: 'facilities',
+		category: category,
+		footerpopular:footerpopular,
+		footerwedding:footerwedding,
+		footerbirthday:footerbirthday,
+		footertopattr:footertopattr,
+		
+	});
+});
+
+router.get("/partyhall",  async (req, res) => {
+	const category = await Category.find();
+	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);
+	const footerwedding = await Category.find({ tag: 'wedding' }).limit(5);
+	const footerbirthday = await Category.find({ tag: 'birthday' }).limit(5);
+	const footertopattr = await Category.find({ tag: 'top attraction' }).limit(5);
+	res.render("partyhall", {
+		activePage: 'partyhall',
+		category: category,
+		footerpopular:footerpopular,
+		footerwedding:footerwedding,
+		footerbirthday:footerbirthday,
+		footertopattr:footertopattr,
+	});
+});
+
 router.get("/services",  async (req, res) => {
 	const category = await Category.find();
 	const footerpopular = await Category.find({ tag: 'popular' }).limit(5);

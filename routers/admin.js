@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../build/auth');
 const path = require('path');
 const { Category } = require("../models/category");
+const { Sub } = require("../models/sub");
 const { subCategory } = require("../models/subcategory");
 const { Product } = require("../models/product");
 const {Heading} = require("../models/heading");
@@ -53,6 +54,7 @@ router.get(`/dashboard`, ensureAuthenticated, async(req, res) => {
 	// const order = await Order.countDocuments();
 	const product = await Product.countDocuments();
 	const category = await Category.countDocuments();
+	const sub = await Sub.countDocuments();
 	const subcategory = await subCategory.countDocuments();
 	// const user = await User.countDocuments();
 	const contact = await Contact.countDocuments();
@@ -61,6 +63,7 @@ router.get(`/dashboard`, ensureAuthenticated, async(req, res) => {
 		// orders: order,
 		product: product,
 		category: category,
+		sub: sub,
 		subcategory: subcategory,
 		user: req.user,
 		contact: contact,
@@ -79,6 +82,14 @@ router.get(`/category`, ensureAuthenticated,  async (req, res) => {
 		user: req.user,
 	});
 });
+router.get(`/sub`, ensureAuthenticated,  async (req, res) => {
+	const sub = await Sub.find();
+	
+	res.render("admin/category", {
+		sub: sub,
+		user: req.user,
+	});
+});
 
 router.get(`/review`, ensureAuthenticated,  async (req, res) => {
 	const review = await Review.find();
@@ -92,6 +103,12 @@ router.get(`/review`, ensureAuthenticated,  async (req, res) => {
 router.get(`/addcategory`, ensureAuthenticated, async (req, res) => {
 
 	res.render("admin/addcategory", {
+		user: req.user,
+	});
+});
+router.get(`/addsub`, ensureAuthenticated, async (req, res) => {
+
+	res.render("admin/addsub", {
 		user: req.user,
 	});
 });
@@ -123,6 +140,26 @@ router.post(`/addcategory`, upload.single("image"),ensureAuthenticated, async (r
 		res.status(500).send("This category was not sent to database...");
 
 	res.redirect("/admin/category");
+});
+router.post(`/addsub`, upload.single("image"),ensureAuthenticated, async (req, res) => {
+	const fileName = req.file.filename;
+	const basePath = `${req.protocol}://${req.get("host")}/uploads/`;
+	
+	let sub = new Sub({
+		country: req.body.country,
+		name: req.body.name,
+		tag:req.body.tag,
+		image: `${basePath}${fileName}`,
+		price: req.body.price,
+		
+	});
+
+	sub = await sub.save();
+
+	if (!sub)
+		res.status(500).send("This category was not sent to database...");
+
+	res.redirect("/admin/sub");
 });
 
 router.post(`/addheading`, ensureAuthenticated, async (req, res) => {
@@ -162,6 +199,18 @@ router.get("/updatecategory", ensureAuthenticated, async (req, res) => {
 	res.render("admin/updatecategory", {
 		// subcategory: subcategory,
 		category: category,
+		user: req.user,
+		// product: product,
+	});
+});
+
+router.get("/updatesub", ensureAuthenticated, async (req, res) => {
+	const sub = await Sub.findOne({ _id: req.query.id }).populate(
+		// "subcategory","product"
+	);
+	res.render("admin/updatesub", {
+		// subcategory: subcategory,
+		sub: sub,
 		user: req.user,
 		// product: product,
 	});
@@ -223,6 +272,41 @@ router.post(
 
 
 router.post(
+	"/deletesub/:id",
+	ensureAuthenticated,
+	upload.single("image"),
+	async (req, res) => {
+		if (!mongoose.isValidObjectId(req.params.id)) {
+			return res.status(400).send("Invalid Category id");
+		}
+
+		
+
+		const file = req.file;
+		let imagePath;
+
+		if (file) {
+			const fileName = req.file.filename;
+			const basePath = `${req.protocol}://${req.get("host")}/uploads/`;
+			imagePath = `${basePath}${fileName}`;
+			
+			// fs.unlinkSync(`${imagePath}`);
+		} else {
+			const sub = await Sub.findById(req.params.id);
+			imagePath = sub.image;
+			// fs.unlinkSync(`${imagePath}`);
+		}
+		await Sub.findByIdAndDelete(req.params.id, { new: true });
+
+	
+
+		res.redirect("/admin/sub");
+	}
+);
+
+
+
+router.post(
 	"/updatecategory/:id",
 	ensureAuthenticated,
 	upload.single("image"),
@@ -265,6 +349,48 @@ router.post(
 
 
 
+
+
+router.post(
+	"/updatesub/:id",
+	ensureAuthenticated,
+	upload.single("image"),
+	async (req, res) => {
+		if (!mongoose.isValidObjectId(req.params.id)) {
+			return res.status(400).send("Invalid Category id");
+		}
+
+		const file = req.file;
+		let imagePath;
+
+		if (file) {
+			const fileName = req.file.filename;
+			const basePath = `${req.protocol}://${req.get("host")}/uploads/`;
+			imagePath = `${basePath}${fileName}`;
+		} else {
+			const sub = await Sub.findById(req.params.id);
+			imagePath = sub.image;
+		}
+
+		const updatesub = await Sub.findByIdAndUpdate(
+			req.params.id,
+			{
+				country: req.body.country,
+				tag:req.body.tag,
+				name: req.body.name,
+				price: req.body.price,
+				image: imagePath,
+				product: req.body.product,
+				updated_at: Date.now(),
+			},
+			{
+				new: true,
+			}
+		);
+
+		res.redirect("/admin/sub");
+	}
+);
 
 
 
