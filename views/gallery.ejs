@@ -144,7 +144,7 @@
 
                 <div class="main-box">
                     <div class="logo-box">
-                        <div class="logo"><a href="/"><img src="images/logo.png" alt="Sumo Anaika Logo" title=""></a></div>
+                        <div class="logo"><a href="/"><img src="./images/royallogo.png" alt="Sumo Anaika Logo" title=""></a></div>
                         <div class="upper-right">
                             <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><i class="flaticon-menu"></i></a>
                         </div>
@@ -167,7 +167,7 @@
         <!-- Mobile Header -->
 
         <div class="mobile-header">
-            <div class="logo"><a href="/"><img src="images/logo.png" alt="Sumo Anaika Wedding Hall Logo" title=""></a></div>
+            <div class="logo"><a href="/"><img src="./images/royallogo.png" alt="Sumo Anaika Wedding Hall Logo" title=""></a></div>
 
             <!--Nav Box-->
 
@@ -188,7 +188,7 @@
             <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
             <nav class="menu-box">
                 <div class="upper-box">
-                    <div class="nav-logo"><a href="/"><img src="images/logo.png" alt="Le Foliage reception hall company Logo" title=""></a></div>
+                    <div class="nav-logo"><a href="/"><img src="./images/royallogo.png" alt="Le Foliage reception hall company Logo" title=""></a></div>
                     <div class="close-btn"><i class="icon flaticon-close"></i></div>
 
                 </div>
@@ -351,14 +351,59 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
             </div> -->
 
             <!-- Add a filter button outside the row -->
-            <button class="filterButton" data-tag="all">Show All</button>
-            <button class="filterButton" data-tag="wedding">Wedding</button>
-            <button class="filterButton" data-tag="birthday">Birthday</button>
-            <button class="filterButton" data-tag="popular">Popular</button>
-            <button class="filterButton" data-tag="party">Party</button>
 
-<div class="row">
-    <!-- Gallery Block -->
+            <!-- HTML !-->
+
+<style>
+
+    /* CSS */
+.button-13 {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.button-13:hover {
+    background-color: #f7fafa;
+}
+
+.button-13:focus {
+    border-color: #008296;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    outline: 0;
+}
+
+.modal-backdrop {
+    z-index: 0 !important;
+}
+</style>
+
+<div style="margin-bottom:10px">
+    <button class="button-13 filterButton" data-tag="all">Show All</button>
+    <button class="button-13 filterButton" data-tag="wedding">Wedding</button>
+    <button class="button-13 filterButton" data-tag="birthday">Birthday</button>
+    <button class="button-13 filterButton" data-tag="popular">Popular</button>
+    <button class="button-13 filterButton" data-tag="party">Party</button>
+</div>
+
+<!-- <div class="row">
     <% category.forEach((item, index) => { %>
     <div class="gallery-block col-lg-4 col-md-4 col-sm-12" data-tag="<%= item.tag %>">
         <div class="image-box" style="width: 312px; height: 174px; object-fit: contain; cursor: pointer;">
@@ -369,7 +414,56 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
         </div>
     </div>
     <% }) %>
+</div> -->
+
+
+
+<div class="row" id="galleryRow">
+    <!-- Gallery Block -->
+    <% category.forEach((item, index) => { %>
+    <div class="gallery-block col-lg-4 col-md-4 col-sm-12" data-tag="<%= item.tag %>">
+        <div class="image-box" style="width: 312px; height: 174px; object-fit: contain; cursor: pointer;">
+            <figure class="image">
+                <img src="<%= item.image %>" alt="Mini Wedding Halls in South Bangalore" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </figure>
+            <div class="overlay-box">
+                <h3><%= item.tag %></h3>
+            </div>
+        </div>
+    </div>
+    <% }) %>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="imageModalLabel">Modal Title</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Modal Image" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this script at the end of your body tag or in a separate script file -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('imageModal'));
+
+        $('#galleryRow').on('click', '.image-box', function () {
+            var imageSrc = $(this).find('img').attr('src');
+            $('#modalImage').attr('src', imageSrc);
+            modal.show();
+        });
+    });
+</script>
 
 <!-- <script>
     // Add event listener to the filter button
@@ -436,16 +530,16 @@ Jayanagar, Bengaluru, <br>Karnataka 560070 <strong>Address</strong></li>
 
                 <div class="text-center">
 
-                    <div class="footer-logo"><a href="#"><img src="images/logo-2.png" alt="Banquet Hall Company Logo"></a></div>
+                    <div class="footer-logo"><a style="display: flex; justify-content: center;" href="#"><img style="width: 10%;" src="./images/royallogo.png" alt="Banquet Hall Company Logo"></a></div>
 
-                    <div class="text">Sumo Anaika Banquet Hall is a premier banquet hall that is perfect for hosting both social and corporate events. Guests frequently host weddings, anniversaries, product launches, annual shareholder meetings and more at Sumo Anaika.</div> 
+                    <!-- <div class="text">Sumo Anaika Banquet Hall is a premier banquet hall that is perfect for hosting both social and corporate events. Guests frequently host weddings, anniversaries, product launches, annual shareholder meetings and more at Sumo Anaika.</div>  -->
 					
 					
-					<ul class="footer-nav">
+					<!-- <ul class="footer-nav">
 
                        <li style="color:#fff;"><a href="partyhall-in-south-bangalore.html" style="color:#fff;">Partyhall in South Bangalore</a> | <a href="partyhall-in-jayanagar.html" style="color:#fff;">Partyhall in Jayanagar</a> | <a href="partyhall-in-banashankari.html" style="color:#fff;">Partyhall in Banashankari</a></li>
 
-                    </ul>
+                    </ul> -->
 					<br>
                 </div>
 
