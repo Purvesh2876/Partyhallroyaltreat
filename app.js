@@ -79,7 +79,7 @@ app.use('/users', require('./routers/users.js'));
 
 //Listening to port
 app.listen(port, () => {
-    console.log(`The server is running on port ${port}`)
+    console.log(`The server is running on port 'http://localhost:${port}'`)
     
     //Check if the database is working fine
     mongoose.connect(CS)
