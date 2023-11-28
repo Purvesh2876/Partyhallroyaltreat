@@ -3330,9 +3330,9 @@ Page Title
     top: 0;
     height: 100%;
     width: 100%;
-    background: #000ec1;
-    background: -o-radial-gradient(center, ellipse, #000ec1 0%, #000c47 100%, #000c47 100%);
-    background: radial-gradient(ellipse at center, #000ec1 0%, #000c47 100%, #000c47 100%);
+    background: #000658;
+    /* background: -o-radial-gradient(center, ellipse, #000ec1 0%, #000c47 100%, #000c47 100%);
+    background: radial-gradient(ellipse at center, #000ec1 0%, #000c47 100%, #000c47 100%); */
     content: "";
     opacity: .9;
 }
