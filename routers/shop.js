@@ -187,7 +187,7 @@ router.post("/ticket", (req,res)=>{
 		secure: true,
 		auth: {
 		  user: 'rahulvadhiya.vmukti@gmail.com',
-		  pass: 'fiqhppdmwzegrtlr',
+		  pass: 'iyvdfpozoxpdkmdp',
 		}
 	});
 	var mailOptions = {
@@ -251,13 +251,13 @@ router.post("/contact", (req,res)=>{
 		port: 465,
 		secure: true,
 		auth: {
-		  user: 'rahulvadhiya.vmukti@gmail.com',
-		  pass: 'fiqhppdmwzegrtlr',
+		  user: 'info.royaltreat01@gmail.com',
+		  pass: 'iyvdfpozoxpdkmdp',
 		}
 	});
 	var mailOptions = {
 		from: mailContent.email,
-		to: 'rahulvadhiya.vmukti@gmail.com',
+		to: 'info.royaltreat01@gmail.com',
 		subject: "Contact Us Message",
 		// subject: "mailContent.subject",
 		text:  "Contact Us Message \n" +
